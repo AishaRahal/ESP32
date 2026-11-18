@@ -1,0 +1,64 @@
+PK   $l!]               wokwi-project.txtDownloaded from https://wokwi.com/projects/473978888946899969
+
+Simulate this project on https://wokwi.com
+PK�rчm   m   PK   $l!]            
+   sketch.ino#include <DHT.h>
+
+#define DHTPIN 4
+#define DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(115200);
+  dht.begin();
+
+  Serial.println("DHT22 iniciado");
+}
+
+void loop() {
+  float humedad = dht.readHumidity();
+  float temperatura = dht.readTemperature();
+
+  if (isnan(humedad) || isnan(temperatura)) {
+    Serial.println("Error al leer el DHT22");
+    delay(2000);
+    return;
+  }
+
+  Serial.print("Temperatura: ");
+  Serial.print(temperatura);
+  Serial.println(" °C");
+
+  Serial.print("Humedad: ");
+  Serial.print(humedad);
+  Serial.println(" %");
+
+  Serial.println("--------------------");
+
+  delay(2000);
+}PK�C�v  v  PK   $l!]               diagram.json{
+  "version": 1,
+  "author": "Claudio Joaquin Farias",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -143.7, "left": -5.4, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v48", "h-48", "v9.6" ] ],
+    [ "dht1:SDA", "esp:4", "green", [ "v9.6", "h124.9", "v172.8" ] ],
+    [ "dht1:GND", "esp:GND.2", "black", [ "v-9.6", "h86.4", "v67.2" ] ]
+  ],
+  "dependencies": {}
+}PKyO�j  j  PK   $l!]               libraries.txt# Wokwi Library List
+# See https://docs.wokwi.com/guides/libraries
+
+# Automatically added based on includes:
+DHT sensor library
+
+DHT Sensors Non-Blocking
+PKl�"3�   �   PK   $l!]�rчm   m              ��    wokwi-project.txtPK   $l!]�C�v  v  
+           ���   sketch.inoPK   $l!]yO�j  j             ��Z  diagram.jsonPK   $l!]l�"3�   �              ���  libraries.txtPK      �   �
